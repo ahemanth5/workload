@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DEMO</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Load TensorFlow.js. This is required to use MobileNet. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
+    <!-- Load the MobileNet model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Karma", sans-serif
+        }
+
+        .d3-bar-block .d3-bar-item {
+            padding: 20px
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar (hidden by default) -->
+    <nav class="d3-sidebar d3-bar-block d3-card d3-top d3-xlarge d3-animate-left"
+        style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+        <a href="javascript:void(0)" onclick="Demo_close()" class="d3-bar-item d3-button">Close Menu</a>
+        <a href="#image" onclick="Demo_close()" class="d3-bar-item d3-button">Image Classification</a>
+    </nav>
+
+    <!-- Top menu -->
+    <div class="d3-top">
+        <div class="d3-white d3-xlarge" style="max-width:1200px;margin:auto">
+            <div class="d3-button d3-padding-16 d3-left" onclick="Demo_open()">☰</div>
+            <div class="d3-center d3-padding-16">Image Classification</div>
+            <title></title>
+            </head>
+
+            <body>
+                <div id="durationTime"></div>
+        </div>
+    </div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="d3-main d3-content d3-padding" style="max-width:1200px;margin-top:100px">
+
+        <!-- First Photo Grid-->
+        <div class="d3-row-padding d3-padding-16 d3-center" id="image">
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img0" src="./images/1.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval0"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img1" src="./images/2.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval1"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img2" src="./images/3.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval2"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img3" src="./images/4.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Photo Grid-->
+        <div class="d3-row-padding d3-padding-16 d3-center" id="image">
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img4" src="./images/5.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval4"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img5" src="./images/6.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval5"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img6" src="./images/7.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval6"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img7" src="./images/8.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval7"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Third Photo Grid-->
+        <div class="d3-row-padding d3-padding-16 d3-center" id="image">
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img8" src="./images/9.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval8"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img9" src="./images/10.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval9"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img10" src="./images/11.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval10"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img11" src="./images/12.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval11"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fourth Photo Grid-->
+        <div class="d3-row-padding d3-padding-16 d3-center" id="image">
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img12" src="./images/13.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval12"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img13" src="./images/14.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval13"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img14" src="./images/15.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval14"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img15" src="./images/16.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval15"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fifth Photo Grid-->
+        <div class="d3-row-padding d3-padding-16 d3-center" id="image">
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img16" src="./images/17.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval16"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img17" src="./images/18.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval17"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img18" src="./images/19.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval18"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img19" src="./images/20.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval19"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sixth Photo Grid-->
+        <div class="d3-row-padding d3-padding-16 d3-center" id="image">
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img20" src="./images/21.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval20"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img21" src="./images/22.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval21"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img22" src="./images/23.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval22"></div>
+                </div>
+            </div>
+            <div class="d3-quarter">
+                <div class="img-hover-zoom">
+                    <img id="img23" src="./images/24.jpeg" style="width:100%; height: 178px" alt="">
+                    <div class="image-prediction" id="imgval23"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End page content -->
+    </div>
+
+    <script>
+        // Script to open and close sidebar
+        function Demo_open() {
+            document.getElementById("mySidebar").style.display = "block";
+        }
+
+        function Demo_close() {
+            document.getElementById("mySidebar").style.display = "none";
+        }
+    </script>
+
+    <script>
+
+        const imgcount = 24;
+        let getCurrentTime = () => {
+            if ("performance" in window == true) {
+                return performance.now();
+            }
+            return new Data().getTime();
+        }
+
+        let startTime = 0;
+        let endTime = 0;
+        const imgPrediction = async () => {
+            const prediction = await mobilenet.load();
+            let imageValue = [];
+            startTime = getCurrentTime();
+            for (let i = 0; i < imgcount; i++) {
+                let img = document.getElementById('img' + i);
+                let imgsize = await prediction.classify(img);
+                imageValue.push(imgsize);
+            }
+
+            imgtxt(imageValue);
+            endTime = getCurrentTime();
+        }
+        let imgtxt = (imageValue) => {
+            let value = [];
+            imageValue.map(element => {
+                console.log(element, 'element');
+                const finalvalue = element.reduce((prev, current) => (+prev.probability > +current.probability) ? prev : current);
+                value.push(finalvalue);
+            });
+
+            let i = 0;
+            value.forEach((index, i) => {
+                let elList = document.getElementById('imgval' + i);
+                elList.innerHTML += index.className;
+            })
+        }
+
+        const durationTime = async () => {
+            await imgPrediction();
+            const duration = (endTime - startTime);
+            console.log('duration', Math.round(duration));
+            document.getElementById('durationTime').innerHTML = 'Total Duration = ' + Math.round(duration).toString() + ' ms';
+            return duration;
+        }
+        durationTime();
+
+    </script>
+</body>
+</html>
